@@ -41,6 +41,15 @@ func (j *Js) Get(key string) *Js {
 	return j
 }
 
+//判断是否有郊
+func (j *Js) IsValid() bool {
+	if nil == j.data {
+		return false
+	} else {
+		return true
+	}
+}
+
 //return json data
 func (j *Js) Getdata() map[string]interface{} {
 	if m, ok := (j.data).(map[string]interface{}); ok {
@@ -53,8 +62,13 @@ func (j *Js) Getindex(i int) *Js {
 
 	num := i - 1
 	if m, ok := (j.data).([]interface{}); ok {
-		v := m[num]
-		j.data = v
+		//防止越界
+		if num < len((j.data).([]interface{})) {
+			v := m[num]
+			j.data = v
+		} else {
+			j.data = nil
+		}
 		return j
 	}
 
@@ -154,6 +168,9 @@ func (j *Js) Tostring() string {
 	}
 	if m, ok := j.data.(float64); ok {
 		return strconv.FormatFloat(m, 'f', -1, 64)
+	}
+	if m, ok := j.data.(bool); ok {
+		return strconv.FormatBool(m)
 	}
 	return ""
 }
