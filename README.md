@@ -13,7 +13,14 @@ gojson
 
 ###安装
 
- 	 go get github.com/widuu/gojson
+ 	 原作者 go get github.com/widuu/gojson
+ 	 修改过的包 go get github.com/zyx4843/gojson
+
+###修改说明
+	
+	增加函数IsValid()判断数据是否有效
+	Getindex防止出现越界
+	Tostring增加bool类型
 
 ###使用简介
 
